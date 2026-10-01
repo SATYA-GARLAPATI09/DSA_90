@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="obsidian">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DSA 90 War Room · Deep Focus & Mastery</title>
+<meta name="description" content="90-Day DSA Mastery Challenge: 150 LeetCode problems, 18 patterns, interactive visualizers, customizable Pomodoro, zero-excuses discipline tracker.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   FOCUS PALETTES (High Contrast, Ergonomic & Non-Fatiguing)
+   ============================================================ */
+:root, [data-theme="obsidian"] {
+  --bg: #07090e;
+  --bg-radial: radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.08) 0%, rgba(7, 9, 14, 1) 80%);
+  --card: rgba(15, 20, 30, 0.78);
+  --card-hover: rgba(22, 30, 46, 0.88);
+  --card-solid: #0d121d;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-active: #38bdf8;
+  --text: #f1f5f9;
+  --text-muted: #94a3b8;
+  --accent: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.28);
+  --easy: #10b981;
+  --easy-glow: rgba(16, 185, 129, 0.22);
+  --medium: #f59e0b;
+  --medium-glow: rgba(245, 158, 11, 0.22);
+  --hard: #f43f5e;
+  --hard-glow: rgba(244, 63, 94, 0.22);
+  --gold: #fbbf24;
+  --purple: #c084fc;
+}
+
+[data-theme="forest"] {
+  --bg: #060e0a;
+  --bg-radial: radial-gradient(circle at 50% 0%, rgba(16, 185, 129, 0.09) 0%, rgba(6, 14, 10, 1) 80%);
+  --card: rgba(12, 26, 19, 0.78);
+  --card-hover: rgba(17, 36, 26, 0.88);
+  --card-solid: #0a1711;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-active: #34d399;
+  --text: #ecfdf5;
+  --text-muted: #6ee7b7;
+  --accent: #10b981;
+  --accent-glow: rgba(16, 185, 129, 0.3);
+  --easy: #34d399;
+  --easy-glow: rgba(52, 211, 153, 0.25);
+  --medium: #fbbf24;
+  --medium-glow: rgba(251, 191, 36, 0.22);
+  --hard: #fb7185;
+  --hard-glow: rgba(251, 113, 133, 0.22);
+  --gold: #facc15;
+  --purple: #a78bfa;
+}
+
+[data-theme="tokyo"] {
+  --bg: #090a16;
+  --bg-radial: radial-gradient(circle at 50% 0%, rgba(129, 140, 248, 0.12) 0%, rgba(9, 10, 22, 1) 80%);
+  --card: rgba(18, 20, 38, 0.82);
+  --card-hover: rgba(26, 29, 54, 0.92);
+  --card-solid: #111324;
+  --border: rgba(255, 255, 255, 0.09);
+  --border-active: #818cf8;
+  --text: #f8fafc;
+  --text-muted: #a5b4fc;
+  --accent: #818cf8;
+  --accent-glow: rgba(129, 140, 248, 0.32);
+  --easy: #4ade80;
+  --easy-glow: rgba(74, 222, 128, 0.22);
+  --medium: #fb923c;
+  --medium-glow: rgba(251, 146, 60, 0.22);
+  --hard: #f43f5e;
+  --hard-glow: rgba(244, 63, 94, 0.22);
+  --gold: #fcd34d;
+  --purple: #c084fc;
+}
+
+[data-theme="light"] {
+  --bg: #f8fafc;
+  --bg-radial: radial-gradient(circle at 50% 0%, rgba(14, 165, 233, 0.08) 0%, rgba(248, 250, 252, 1) 85%);
+  --card: rgba(255, 255, 255, 0.92);
+  --card-hover: #ffffff;
+  --card-solid: #ffffff;
+  --border: rgba(0, 0, 0, 0.09);
+  --border-active: #0284c7;
+  --text: #0f172a;
+  --text-muted: #64748b;
+  --accent: #0284c7;
+  --accent-glow: rgba(2, 132, 199, 0.2);
+  --easy: #059669;
+  --easy-glow: rgba(5, 150, 105, 0.15);
+  --medium: #d97706;
+  --medium-glow: rgba(217, 119, 6, 0.15);
+  --hard: #e11d48;
+  --hard-glow: rgba(225, 29, 72, 0.15);
+  --gold: #b45309;
+  --purple: #7e22ce;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  background-image: var(--bg-radial);
+  background-attachment: fixed;
+  color: var(--text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.wrapper { max-width: 1020px; margin: 0 auto; padding: 16px; width: 100%; flex: 1; }
+
+/* Headings */
+h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; }
+h1 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.02em; display: flex; align-items: center; gap: 8px; }
+h2 { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; margin: 8px 0; }
+h3 { font-size: 1rem; font-weight: 600; margin-bottom: 6px; }
+code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
+
+/* Sticky Glass Topbar & Pomodoro */
+.top-nav {
+  position: sticky;
+  top: 10px;
+  z-index: 100;
+  background: var(--card);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 8px 16px;
+  margin-bottom: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  animation: slideDown 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.pomo-widget {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.pomo-clock {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 0 18px var(--accent-glow);
+  min-width: 65px;
+  letter-spacing: -0.5px;
+}
+
+/* Custom Pomodoro Controls Popover */
+.pomo-settings-box {
+  background: var(--card-solid);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  margin-top: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  animation: fadeIn 0.2s ease;
+}
+
+/* Buttons with Tactile Spring Transitions */
+button, .btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9px;
+  padding: 7px 14px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: var(--card-solid);
+  color: var(--text);
+  transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  user-select: none;
+  text-decoration: none;
+}
+button:hover, .btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  background: var(--card-hover);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+button:active, .btn:active { transform: translateY(0) scale(0.98); }
+
+button.p, .btn.p {
+  background: linear-gradient(135deg, var(--accent) 0%, #0284c7 100%);
+  color: #ffffff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+button.p:hover, .btn.p:hover {
+  box-shadow: 0 8px 22px var(--accent-glow);
+  filter: brightness(1.1);
+}
+button.ok, .btn.ok {
+  background: linear-gradient(135deg, var(--easy) 0%, #059669 100%);
+  color: #ffffff;
+  border-color: var(--easy);
+  box-shadow: 0 4px 14px var(--easy-glow);
+}
+button.sm, .btn.sm { padding: 4px 10px; font-size: 12px; border-radius: 7px; }
+
+/* Cards & Glassmorphism */
+.c {
+  background: var(--card);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  margin: 12px 0;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeIn 0.35s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.c:hover { border-color: rgba(255, 255, 255, 0.14); }
+.card-warn { border-color: var(--hard); background: color-mix(in srgb, var(--hard) 10%, var(--card)); }
+
+/* Heatmap Grid */
+.gr {
+  display: grid;
+  grid-template-columns: repeat(15, 1fr);
+  gap: 4px;
+  margin: 10px 0 6px;
+}
+@media (max-width: 680px) { .gr { grid-template-columns: repeat(10, 1fr); } }
+@media (max-width: 440px) { .gr { grid-template-columns: repeat(8, 1fr); gap: 3px; } }
+
+.gr button {
+  padding: 0;
+  height: 28px;
+  font-size: 11px;
+  font-weight: 700;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+}
+.gr button:hover:not(.lock) {
+  border-color: var(--accent);
+  color: var(--text);
+  transform: scale(1.15);
+  z-index: 2;
+  box-shadow: 0 0 10px var(--accent-glow);
+}
+.gr .done { background: var(--easy); color: #fff; border-color: var(--easy); box-shadow: 0 0 10px var(--easy-glow); }
+.gr .now { outline: 2px solid var(--accent); outline-offset: 1.5px; border-color: var(--accent); color: var(--text); }
+.gr .lock { opacity: 0.3; cursor: not-allowed; }
+.gr .sel { box-shadow: 0 0 0 2px var(--gold); }
+.gr .rev { border-color: var(--gold); color: var(--gold); }
+.gr .rev.done { background: var(--gold); color: #000; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4); }
+.gr .mock { border-color: var(--purple); color: var(--purple); }
+.gr .mock.done { background: var(--purple); color: #fff; box-shadow: 0 0 10px rgba(192, 132, 252, 0.4); }
+
+/* Progress Bar */
+.bar-track { height: 9px; background: rgba(255, 255, 255, 0.06); border-radius: 6px; overflow: hidden; margin: 8px 0; border: 1px solid var(--border); }
+.bar-fill { height: 100%; background: linear-gradient(90deg, var(--accent) 0%, var(--easy) 100%); border-radius: 6px; transition: width 0.4s ease; }
+
+/* Tabs */
+.tabs { display: flex; gap: 6px; overflow-x: auto; margin-bottom: 10px; padding-bottom: 2px; }
+.tabs button { flex: 1; min-width: 95px; white-space: nowrap; font-size: 12.5px; }
+.tabs .on {
+  background: linear-gradient(135deg, var(--accent) 0%, #0284c7 100%);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+/* Badges */
+.badge { display: inline-flex; align-items: center; padding: 1px 7px; border-radius: 5px; font-size: 11px; font-weight: 700; border: 1px solid currentColor; }
+.E { color: var(--easy); border-color: var(--easy); background: var(--easy-glow); }
+.M { color: var(--medium); border-color: var(--medium); background: var(--medium-glow); }
+.H { color: var(--hard); border-color: var(--hard); background: var(--hard-glow); }
+.R { color: var(--gold); border-color: var(--gold); }
+
+/* Interactive Visualizer Canvas with Animated Highlights */
+.rw { display: flex; gap: 6px; align-items: center; margin: 10px 0 24px; overflow-x: auto; padding-bottom: 6px; }
+.rw b { font-size: 12px; color: var(--text-muted); width: 100px; flex: none; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; }
+.bx {
+  min-width: 42px;
+  height: 42px;
+  padding: 0 6px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  flex: none;
+  background: var(--card-solid);
+  font-weight: 700;
+  font-size: 13.5px;
+  font-family: 'JetBrains Mono', monospace;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.bx i {
+  position: absolute;
+  bottom: -18px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 800;
+  color: var(--accent);
+  letter-spacing: -0.5px;
+}
+.bx.a { background: var(--medium); color: #111; border-color: var(--medium); box-shadow: 0 0 14px var(--medium-glow); transform: scale(1.08); }
+.bx.b { background: color-mix(in srgb, var(--accent) 30%, transparent); border-color: var(--accent); }
+.bx.g { background: var(--easy); color: #fff; border-color: var(--easy); box-shadow: 0 0 14px var(--easy-glow); transform: scale(1.08); }
+
+.note { background: rgba(56, 189, 248, 0.08); border-left: 3px solid var(--accent); padding: 10px 14px; border-radius: 8px; font-size: 13.5px; }
+
+/* Links Grid */
+.lk { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 8px 0; }
+.lk a {
+  color: var(--accent);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12.5px;
+  font-weight: 600;
+  background: var(--card-solid);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.lk a:hover {
+  background: var(--card-hover);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--accent-glow);
+}
+
+textarea, input[type=text], input[type=url], input[type=date], select {
+  width: 100%;
+  background: var(--card-solid);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: 10px 12px;
+  margin: 6px 0;
+  font-size: 13.5px;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+textarea:focus, input:focus, select:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+.chk { display: flex; gap: 10px; align-items: flex-start; margin: 12px 0; font-weight: 600; cursor: pointer; user-select: none; }
+.chk input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); cursor: pointer; }
+.mu { color: var(--text-muted); font-size: 13px; }
+.pr { padding: 8px 0; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; border-bottom: 1px solid var(--border); }
+
+pre { background: #030712; padding: 12px; border-radius: 10px; overflow-x: auto; font-size: 12.5px; border: 1px solid var(--border); line-height: 1.5; color: #e2e8f0; }
+
+/* Toast */
+#toast {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom, 0px));
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.95);
+  backdrop-filter: blur(12px);
+  color: #f8fafc;
+  border: 1px solid rgba(255,255,255,0.12);
+  padding: 12px 22px;
+  border-radius: 12px;
+  max-width: 90vw;
+  display: none;
+  z-index: 9999;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+  animation: popUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes popUp {
+  from { opacity: 0; transform: translate(-50%, 14px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+#confetti-canvas { position: fixed; inset: 0; pointer-events: none; z-index: 9998; }
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<div class="wrapper">
+  <!-- Pinned Top Navbar & Customizable Pomodoro -->
+  <div class="top-nav">
+    <div style="display:flex;align-items:center;gap:10px">
+      <h1>⚔️ DSA 90 <span style="font-size:0.85rem;color:var(--text-muted);font-weight:500">War Room</span></h1>
+    </div>
+    <div class="pomo-widget">
+      <span>⏱️</span>
+      <span class="pomo-clock" id="pt">25:00</span>
+      <span class="badge" id="pomo-mode-badge" style="color:var(--accent)">Work</span>
+      <button onclick="PM()" id="pm-btn" class="p sm">Start</button>
+      <button onclick="PR()" class="sm">Reset</button>
+      <button onclick="togglePomoSettings()" class="sm" title="Adjust Timer Duration">⚙️ Timer</button>
+      <button onclick="cycleTheme()" class="sm" title="Change Theme Palette">🎨 Theme</button>
+      <button onclick="exportData()" class="sm" title="Backup Progress">💾 Backup</button>
+      <button onclick="$('#import-file').click()" class="sm" title="Restore Progress">📥 Restore</button>
+      <input type="file" id="import-file" style="display:none" accept=".json" onchange="importData(event)">
+    </div>
+
+    <!-- Collapsible Timer Settings Drawer -->
+    <div id="pomo-settings-panel" style="display:none;width:100%">
+      <div class="pomo-settings-box">
+        <span style="font-weight:700;font-size:13px">⏱️ Preset:</span>
+        <button class="sm" onclick="setPomoPreset(25, 5)">25 / 5 (Classic)</button>
+        <button class="sm" onclick="setPomoPreset(50, 10)">50 / 10 (Deep Work)</button>
+        <button class="sm" onclick="setPomoPreset(45, 15)">45 / 15 (Sprint)</button>
+        <div style="display:flex;align-items:center;gap:6px;margin-left:auto">
+          <label style="font-size:12px;color:var(--text-muted)">Work (min):</label>
+          <input type="number" id="custom-work-min" value="25" min="1" max="120" style="width:55px;padding:3px 6px;margin:0;font-size:12px">
+          <label style="font-size:12px;color:var(--text-muted)">Break (min):</label>
+          <input type="number" id="custom-break-min" value="5" min="1" max="60" style="width:55px;padding:3px 6px;margin:0;font-size:12px">
+          <button class="p sm" onclick="applyCustomPomo()">Apply</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ============================================================
+   1. 150-PROBLEM DATASET (ROADMAP SPREADSHEET & CALENDAR)
+   ============================================================ */
+const D = {
+  "1":["Arrays",[["Contains Duplicate","E","contains-duplicate"],["Product of Array Except Self","M","product-of-array-except-self"],["Valid Sudoku","M","valid-sudoku"]]],
+  "2":["Hashing",[["Valid Anagram","E","valid-anagram"],["Two Sum","E","two-sum"],["Group Anagrams","M","group-anagrams"]]],
+  "3":["Hashing",[["Top K Frequent Elements","M","top-k-frequent-elements"],["Longest Consecutive Sequence","M","longest-consecutive-sequence"]]],
+  "4":["Hashing",[["Subarray Sum Equals K","M","subarray-sum-equals-k"]]],
+  "5":["Two Pointers",[["Valid Palindrome","E","valid-palindrome"],["Two Sum II - Input Array Is Sorted","M","two-sum-ii-input-array-is-sorted"]]],
+  "6":["Two Pointers",[["Sort Colors","M","sort-colors"],["3Sum","M","3sum"]]],
+  "7":["Review",[["Review Day: redo Days 1-6 without peeking","R","review-1-6"]]],
+  "8":["Two Pointers",[["Container With Most Water","M","container-with-most-water"],["Trapping Rain Water","H","trapping-rain-water"]]],
+  "9":["Sliding Window",[["Best Time to Buy and Sell Stock","E","best-time-to-buy-and-sell-stock"],["Longest Substring Without Repeating Characters","M","longest-substring-without-repeating-characters"]]],
+  "10":["Sliding Window",[["Longest Repeating Character Replacement","M","longest-repeating-character-replacement"],["Permutation in String","M","permutation-in-string"]]],
+  "11":["Sliding Window",[["Find All Anagrams in a String","M","find-all-anagrams-in-a-string"],["Minimum Window Substring","H","minimum-window-substring"]]],
+  "12":["Sliding Window",[["Sliding Window Maximum","H","sliding-window-maximum"]]],
+  "13":["Stack",[["Valid Parentheses","E","valid-parentheses"],["Implement Queue using Stacks","E","implement-queue-using-stacks"],["Min Stack","M","min-stack"]]],
+  "14":["Review",[["Review Day: redo Days 8-13 without peeking","R","review-8-13"]]],
+  "15":["Stack",[["Evaluate Reverse Polish Notation","M","evaluate-reverse-polish-notation"],["Daily Temperatures","M","daily-temperatures"]]],
+  "16":["Stack",[["Generate Parentheses","M","generate-parentheses"],["Car Fleet","M","car-fleet"]]],
+  "17":["Stack",[["Largest Rectangle in Histogram","H","largest-rectangle-in-histogram"]]],
+  "18":["Binary Search",[["Binary Search","E","binary-search"],["Find First and Last Position in Sorted Array","M","find-first-and-last-position-of-element-in-sorted-array"]]],
+  "19":["Binary Search",[["Search a 2D Matrix","M","search-a-2d-matrix"],["Koko Eating Bananas","M","koko-eating-bananas"]]],
+  "20":["Binary Search",[["Find Minimum in Rotated Sorted Array","M","find-minimum-in-rotated-sorted-array"],["Search in Rotated Sorted Array","M","search-in-rotated-sorted-array"]]],
+  "21":["Review",[["Review Day: redo Days 15-20 without peeking","R","review-15-20"]]],
+  "22":["Binary Search",[["Time Based Key-Value Store","M","time-based-key-value-store"],["Median of Two Sorted Arrays","H","median-of-two-sorted-arrays"]]],
+  "23":["Linked List",[["Reverse Linked List","E","reverse-linked-list"],["Merge Two Sorted Lists","E","merge-two-sorted-lists"],["Linked List Cycle","E","linked-list-cycle"]]],
+  "24":["Linked List",[["Palindrome Linked List","E","palindrome-linked-list"],["Reorder List","M","reorder-list"]]],
+  "25":["Linked List",[["Remove Nth Node From End of List","M","remove-nth-node-from-end-of-list"],["Find the Duplicate Number","M","find-the-duplicate-number"]]],
+  "26":["Linked List",[["Add Two Numbers","M","add-two-numbers"],["Copy List with Random Pointer","M","copy-list-with-random-pointer"]]],
+  "27":["Linked List",[["LRU Cache","M","lru-cache"],["Merge K Sorted Lists","H","merge-k-sorted-lists"]]],
+  "28":["Review",[["Review Day: redo Days 22-27 without peeking","R","review-22-27"]]],
+  "29":["Linked List",[["Reverse Nodes in K-Group","H","reverse-nodes-in-k-group"]]],
+  "30":["Trees",[["Invert Binary Tree","E","invert-binary-tree"],["Maximum Depth of Binary Tree","E","maximum-depth-of-binary-tree"],["Same Tree","E","same-tree"]]],
+  "31":["Trees",[["Diameter of Binary Tree","E","diameter-of-binary-tree"],["Balanced Binary Tree","E","balanced-binary-tree"],["Subtree of Another Tree","E","subtree-of-another-tree"]]],
+  "32":["Trees",[["Lowest Common Ancestor of a BST","M","lowest-common-ancestor-of-a-binary-search-tree"],["Binary Tree Level Order Traversal","M","binary-tree-level-order-traversal"]]],
+  "33":["Trees",[["Binary Tree Right Side View","M","binary-tree-right-side-view"],["Count Good Nodes in Binary Tree","M","count-good-nodes-in-binary-tree"]]],
+  "34":["Trees",[["Validate Binary Search Tree","M","validate-binary-search-tree"],["Kth Smallest Element in a BST","M","kth-smallest-element-in-a-bst"]]],
+  "35":["Review",[["Review Day: redo Days 29-34 without peeking","R","review-29-34"]]],
+  "36":["Trees",[["Construct Binary Tree from Preorder and Inorder","M","construct-binary-tree-from-preorder-and-inorder-traversal"],["Binary Tree Maximum Path Sum","H","binary-tree-maximum-path-sum"]]],
+  "37":["Trees",[["Serialize and Deserialize Binary Tree","H","serialize-and-deserialize-binary-tree"]]],
+  "38":["Heap / Priority Queue",[["Kth Largest Element in a Stream","E","kth-largest-element-in-a-stream"],["Last Stone Weight","E","last-stone-weight"]]],
+  "39":["Heap / Priority Queue",[["K Closest Points to Origin","M","k-closest-points-to-origin"],["Kth Largest Element in an Array","M","kth-largest-element-in-an-array"]]],
+  "40":["Heap / Priority Queue",[["Task Scheduler","M","task-scheduler"],["Design Twitter","M","design-twitter"]]],
+  "41":["Heap / Priority Queue",[["Find Median from Data Stream","H","find-median-from-data-stream"]]],
+  "42":["Review",[["Review Day: redo Days 36-41 without peeking","R","review-36-41"]]],
+  "43":["Backtracking",[["Subsets","M","subsets"],["Subsets II","M","subsets-ii"]]],
+  "44":["Backtracking",[["Combination Sum","M","combination-sum"],["Combination Sum II","M","combination-sum-ii"]]],
+  "45":["Backtracking",[["Permutations","M","permutations"],["Word Search","M","word-search"]]],
+  "46":["Backtracking",[["Palindrome Partitioning","M","palindrome-partitioning"],["Letter Combinations of a Phone Number","M","letter-combinations-of-a-phone-number"]]],
+  "47":["Backtracking",[["N-Queens","H","n-queens"]]],
+  "48":["Tries",[["Implement Trie (Prefix Tree)","M","implement-trie-prefix-tree"],["Design Add and Search Words Data Structure","M","design-add-and-search-words-data-structure"]]],
+  "49":["Review",[["Review Day: redo Days 43-48 without peeking","R","review-43-48"]]],
+  "50":["Tries + Graphs",[["Word Search II","H","word-search-ii"],["Number of Islands","M","number-of-islands"]]],
+  "51":["Graphs",[["Max Area of Island","M","max-area-of-island"],["Clone Graph","M","clone-graph"]]],
+  "52":["Graphs",[["Number of Provinces","M","number-of-provinces"],["Rotting Oranges","M","rotting-oranges"]]],
+  "53":["Graphs",[["Pacific Atlantic Water Flow","M","pacific-atlantic-water-flow"],["Surrounded Regions","M","surrounded-regions"]]],
+  "54":["Graphs",[["Course Schedule","M","course-schedule"],["Course Schedule II","M","course-schedule-ii"]]],
+  "55":["Graphs",[["Redundant Connection","M","redundant-connection"],["Word Ladder","H","word-ladder"]]],
+  "56":["Review",[["Review Day: redo Days 50-55 without peeking","R","review-50-55"]]],
+  "57":["Graphs",[["Network Delay Time","M","network-delay-time"],["Min Cost to Connect All Points","M","min-cost-to-connect-all-points"]]],
+  "58":["Graphs",[["Cheapest Flights Within K Stops","M","cheapest-flights-within-k-stops"],["Swim in Rising Water","H","swim-in-rising-water"]]],
+  "59":["Graphs",[["Reconstruct Itinerary","H","reconstruct-itinerary"]]],
+  "60":["DP - 1D",[["Climbing Stairs","E","climbing-stairs"],["Min Cost Climbing Stairs","E","min-cost-climbing-stairs"]]],
+  "61":["DP - 1D",[["House Robber","M","house-robber"],["House Robber II","M","house-robber-ii"]]],
+  "62":["DP - 1D",[["Longest Palindromic Substring","M","longest-palindromic-substring"],["Palindromic Substrings","M","palindromic-substrings"]]],
+  "63":["Review",[["Review Day: redo Days 57-62 without peeking","R","review-57-62"]]],
+  "64":["DP - 1D",[["Decode Ways","M","decode-ways"],["Coin Change","M","coin-change"]]],
+  "65":["DP - 1D",[["Maximum Product Subarray","M","maximum-product-subarray"],["Word Break","M","word-break"]]],
+  "66":["DP - 1D",[["Longest Increasing Subsequence","M","longest-increasing-subsequence"],["Partition Equal Subset Sum","M","partition-equal-subset-sum"]]],
+  "67":["DP - 2D",[["Unique Paths","M","unique-paths"],["Longest Common Subsequence","M","longest-common-subsequence"]]],
+  "68":["DP - 2D",[["Coin Change II","M","coin-change-ii"],["Target Sum","M","target-sum"]]],
+  "69":["DP - 2D",[["Best Time to Buy and Sell Stock with Cooldown","M","best-time-to-buy-and-sell-stock-with-cooldown"],["Edit Distance","M","edit-distance"]]],
+  "70":["Review",[["Review Day: redo Days 64-69 without peeking","R","review-64-69"]]],
+  "71":["DP - 2D",[["Interleaving String","M","interleaving-string"],["Longest Increasing Path in a Matrix","H","longest-increasing-path-in-a-matrix"]]],
+  "72":["DP - 2D",[["Distinct Subsequences","H","distinct-subsequences"],["Burst Balloons","H","burst-balloons"]]],
+  "73":["DP - 2D",[["Regular Expression Matching","H","regular-expression-matching"]]],
+  "74":["Greedy",[["Maximum Subarray","M","maximum-subarray"],["Jump Game","M","jump-game"]]],
+  "75":["Greedy",[["Jump Game II","M","jump-game-ii"],["Gas Station","M","gas-station"]]],
+  "76":["Greedy",[["Hand of Straights","M","hand-of-straights"],["Merge Triplets to Form Target Triplet","M","merge-triplets-to-form-target-triplet"]]],
+  "77":["Review",[["Review Day: redo Days 71-76 without peeking","R","review-71-76"]]],
+  "78":["Greedy",[["Partition Labels","M","partition-labels"],["Valid Parenthesis String","M","valid-parenthesis-string"]]],
+  "79":["Intervals",[["Insert Interval","M","insert-interval"],["Merge Intervals","M","merge-intervals"]]],
+  "80":["Intervals",[["Non-overlapping Intervals","M","non-overlapping-intervals"],["Minimum Interval to Include Each Query","H","minimum-interval-to-include-each-query"]]],
+  "81":["Math & Geometry",[["Rotate Image","M","rotate-image"],["Spiral Matrix","M","spiral-matrix"]]],
+  "82":["Math & Geometry",[["Set Matrix Zeroes","M","set-matrix-zeroes"],["Happy Number","E","happy-number"]]],
+  "83":["Math & Geometry",[["Plus One","E","plus-one"],["Pow(x, n)","M","powx-n"]]],
+  "84":["Review",[["Review Day: redo Days 78-83 without peeking","R","review-78-83"]]],
+  "85":["Math & Geometry",[["Multiply Strings","M","multiply-strings"],["Detect Squares","M","detect-squares"]]],
+  "86":["Bit Manipulation",[["Single Number","E","single-number"],["Number of 1 Bits","E","number-of-1-bits"]]],
+  "87":["Bit Manipulation",[["Counting Bits","E","counting-bits"],["Reverse Bits","E","reverse-bits"]]],
+  "88":["Bit Manipulation",[["Missing Number","E","missing-number"],["Sum of Two Integers","M","sum-of-two-integers"]]],
+  "89":["Bit Manipulation",[["Reverse Integer (then redo your 5 weakest problems)","M","reverse-integer"]]],
+  "90":["Mock",[["Final Mock: 2 random Mediums + 1 Hard, 45 min each","R","mock-test"]]]
+};
+
+const C = {
+  'Arrays': 'Pass over data once; use prefix/suffix sums or products to avoid O(n²). Watch duplicates, in-place tricks, and edge cases (empty or size 1). Time O(n), Space O(1).',
+  'Hashing': 'Trade memory for speed: keep seen values/counts in a hash map or set for O(1) lookup. Anagram = same counts; Two Sum = look up the complement. Time O(n), Space O(n).',
+  'Two Pointers': 'Two indices walking a sorted array (from both ends or same direction). Every move discards options, giving O(n) instead of O(n²). Time O(n), Space O(1).',
+  'Sliding Window': 'Keep a window [l,r]: expand r to include elements, shrink l when the rule breaks. Fixed or variable size; track counts in a map. Time O(n), Space O(k).',
+  'Stack': 'LIFO structure for matching pairs, nesting, and "next greater" via a monotonic stack. Time O(n), Space O(n).',
+  'Binary Search': 'Halve the search space on any monotonic condition (not only sorted arrays). Be careful with lo/hi/mid boundaries. Time O(log n), Space O(1).',
+  'Linked List': 'Pointer surgery: dummy head, slow/fast pointers (middle, cycle), in-place reversal. Draw pointers before coding. Time O(n), Space O(1).',
+  'Trees': 'Recursion on left/right (DFS) or queue per level (BFS). Define what a call returns, then combine children. BST inorder = sorted. Time O(n), Space O(h).',
+  'Heap / Priority Queue': 'Priority queue gives min/max in O(log n). Use for top-K, streaming median (two heaps), scheduling. Time O(n log k), Space O(k).',
+  'Backtracking': 'Choose → explore → un-choose. Build candidates recursively and prune bad branches early. Think of a decision tree. Time O(2^n) or O(n!), Space O(n).',
+  'Tries': 'Prefix tree: each node is a character, shared prefixes share a path. Fast insert / search / startsWith. Time O(m) per op, Space O(m*n).',
+  'Graphs': 'Nodes + edges (adjacency list). BFS = shortest path by edges, DFS = connectivity/cycles, topological sort for dependencies. Always keep a visited set. Time O(V+E), Space O(V).',
+  'DP - 1D': 'Overlapping subproblems: define dp[i], base case, recurrence. Start from brute-force recursion, add memo, then optimise space. Time O(n), Space O(n) -> O(1).',
+  'DP - 2D': 'State has two dimensions (two strings, grid). dp[i][j] built from neighbours; fill order matters. Time O(m*n), Space O(m*n).',
+  'Greedy': 'Take the locally best choice each step; justify with an exchange argument. Often sort first or track a running max/min. Time O(n log n), Space O(1).',
+  'Intervals': 'Sort by start, sweep, compare with the last interval. Overlap if next.start ≤ last.end. Time O(n log n), Space O(n).',
+  'Math & Geometry': 'Matrix index tricks, layers/transposes, fast exponentiation, avoiding overflow. Time O(n²) matrix / O(log n) pow, Space O(1).',
+  'Bit Manipulation': 'XOR cancels pairs (x^x=0), n&(n-1) clears lowest set bit, shifts multiply/divide by 2. Think in binary. Time O(1), Space O(1).'
+};
+
+const VG = {
+  'Hashing': 'hashtable', 'Linked List': 'list', 'Stack': 'list',
+  'Trees': 'bst', 'Heap / Priority Queue': 'heap', 'Graphs': 'dfsbfs', 'Backtracking': 'recursion'
+};
+
+const g = q => 'https://www.google.com/search?q=' + encodeURIComponent(q);
+const yt = q => 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+
+const res = k => {
+  const a = [
+    ['GeeksforGeeks article', g(k + ' technique site:geeksforgeeks.org')],
+    ['NeetCode roadmap & lessons', 'https://neetcode.io/roadmap'],
+    ['YouTube: ' + k + ' pattern', yt(k + ' pattern leetcode explained')],
+    ['Wikipedia', g(k + ' site:wikipedia.org')],
+    ['LeetCode Explore cards', 'https://leetcode.com/explore/'],
+    ['Deep dive: ' + k + ' tutorial', g(k + ' leetcode patterns tutorial')]
+  ];
+  if (VG[k]) a.push(['VisuAlgo (interactive)', 'https://visualgo.net/en/' + VG[k]]);
+  return a;
+};
+
+const M = {
+  'Arrays': 'ar', 'Hashing': 'hm', 'Two Pointers': 'tp', 'Sliding Window': 'win',
+  'Stack': 'st', 'Binary Search': 'bs', 'Linked List': 'll', 'Trees': 'tr',
+  'Heap / Priority Queue': 'hp', 'Backtracking': 'bt', 'Tries': 'tri', 'Graphs': 'gr',
+  'DP - 1D': 'dp', 'DP - 2D': 'dp2', 'Greedy': 'gd', 'Intervals': 'iv',
+  'Math & Geometry': 'ma', 'Bit Manipulation': 'bi'
+};
+
+const R = (n, v, h, p) => ({ n, v, h: h || {}, p: p || {} });
+
+const V = {
+  ar() {
+    let A = [3, 1, 4, 2], P = [0], s = [];
+    A.forEach((x, i) => {
+      P.push(P[i] + x);
+      s.push({ r: [R('nums', A, { [i]: 'a' }), R('prefix', [...P], { [i + 1]: 'g' })], t: `prefix[${i + 1}] = prefix[${i}] + ${x} = ${P[i + 1]}` });
+    });
+    s.push({ r: [R('prefix', P)], t: `Range sum of nums[1..2] = prefix[3] − prefix[1] = ${P[3] - P[1]} in O(1)` });
+    return ['Prefix sums', s];
+  },
+  hm() {
+    let A = [2, 7, 11, 15], T = 9, seen = [], s = [];
+    for (let i = 0; i < 4; i++) {
+      let c = T - A[i], f = seen.includes(c);
+      s.push({ r: [R('nums', A, { [i]: f ? 'g' : 'a' }), R('seen', seen.length ? [...seen] : ['(empty)'])], t: `Need ${c} (=${T}−${A[i]}). ` + (f ? `${c} is in map → complement found!` : 'Not seen → record ' + A[i]) });
+      if (f) break;
+      seen.push(A[i]);
+    }
+    return ['Two Sum with a hash map (target 9)', s];
+  },
+  tp() {
+    let A = [1, 3, 4, 6, 8, 11], T = 10, l = 0, r = 5, s = [];
+    while (l < r) {
+      let x = A[l] + A[r], c = x == T ? 'g' : 'a';
+      s.push({ r: [R('sorted', A, { [l]: c, [r]: c }, { [l]: 'L', [r]: 'R' })], t: `${A[l]}+${A[r]}=${x}. ` + (x == T ? 'Equals target 10 → found!' : x < T ? 'Too small → move L right' : 'Too big → move R left') });
+      if (x == T) break;
+      x < T ? l++ : r--;
+    }
+    return ['Two Sum II (target 10)', s];
+  },
+  win() {
+    let A = [2, 1, 5, 1, 3, 2], k = 3, s = [], m = 0, sum = 0;
+    for (let i = 0; i < A.length; i++) {
+      sum += A[i];
+      if (i >= k) sum -= A[i - k];
+      if (i >= k - 1) {
+        m = Math.max(m, sum);
+        let h = {};
+        for (let j = i - k + 1; j <= i; j++) h[j] = 'a';
+        s.push({ r: [R('array', A, h)], t: `Window sum = ${sum}, best = ${m}` + (i >= k ? ` (added ${A[i]}, removed ${A[i - k]}: O(1) update)` : '') });
+      }
+    }
+    return ['Max sum of window size 3', s];
+  },
+  st() {
+    let c = "({[]})", o = { '(': ')', '{': '}', '[': ']' }, k = [], s = [];
+    [...c].forEach((x, i) => {
+      let t;
+      if (o[x]) {
+        k.push(x);
+        t = `'${x}' opens → push to stack`;
+      } else {
+        let y = k.pop();
+        t = `'${x}' closes → pop '${y}' ${o[y] == x ? '✓ match' : '✗ mismatch'}`;
+      }
+      s.push({ r: [R('input', [...c], { [i]: 'a' }), R('stack', k.length ? [...k] : ['(empty)'])], t });
+    });
+    s.push({ r: [R('stack', ['(empty)'], { 0: 'g' })], t: 'Stack empty at end → valid string ✓' });
+    return ['Valid Parentheses "({[]})"', s];
+  },
+  bs() {
+    let A = [1, 3, 5, 7, 9, 11, 13], t = 11, lo = 0, hi = 6, s = [];
+    while (lo <= hi) {
+      let m = (lo + hi) >> 1, h = {};
+      for (let i = lo; i <= hi; i++) h[i] = 'b';
+      h[m] = 'a';
+      s.push({ r: [R('sorted', A, h, { [lo]: 'lo', [hi]: 'hi', [m]: 'mid' })], t: `mid=${m} (value ${A[m]}) ` + (A[m] == t ? '= target 11 ✓ found!' : A[m] < t ? '< 11: discard left half' : '> 11: discard right half') });
+      if (A[m] == t) break;
+      A[m] < t ? lo = m + 1 : hi = m - 1;
+    }
+    return ['Search 11 in a sorted array', s];
+  },
+  ll() {
+    let a = [1, 2, 3, 4], rev = [], s = [{ r: [R('list', a), R('reversed', ['null'])], t: 'prev = null, curr = head' }];
+    for (let i = 0; i < 4; i++) {
+      rev.unshift(a[i]);
+      s.push({ r: [R('list', a, { [i]: 'a' }, { [i]: 'curr' }), R('reversed', [...rev], { 0: 'g' }, { 0: 'prev' })], t: `Save next, point ${a[i]}.next → prev, advance prev & curr` });
+    }
+    return ['Reverse a Linked List', s];
+  },
+  tr() {
+    let a = [4, 2, 6, 1, 3, 5, 7], o = [3, 1, 4, 0, 5, 2, 6], out = [], s = [], h = {};
+    o.forEach(i => {
+      out.push(a[i]);
+      s.push({ r: [R('tree (level order)', a, { ...h, [i]: 'a' }), R('inorder output', [...out])], t: `Inorder = left → root → right. Visit ${a[i]}; BST prints strictly sorted` });
+      h[i] = 'g';
+    });
+    return ['Inorder DFS on a BST', s];
+  },
+  hp() {
+    let h = [3, 5, 4, 8], s = [{ r: [R('min-heap', [...h])], t: 'Insert 1: add at end, bubble up while smaller than parent' }];
+    h.push(1);
+    let i = 4;
+    s.push({ r: [R('min-heap', [...h], { 4: 'a' })], t: 'Placed at index 4; parent index = (4-1)>>1 = 1 (value 5)' });
+    while (i > 0) {
+      let p = (i - 1) >> 1;
+      if (h[p] <= h[i]) break;
+      [h[p], h[i]] = [h[i], h[p]];
+      s.push({ r: [R('min-heap', [...h], { [p]: 'g' })], t: `1 < parent 5 → swap; now at index ${p}` });
+      i = p;
+    }
+    s.push({ r: [R('min-heap', [...h], { 0: 'g' })], t: 'Root is minimum: peek in O(1), push/pop in O(log n)' });
+    return ['Min-heap insert & bubble-up', s];
+  },
+  bt() {
+    let q = [[], [1], [1, 2], [1, 2, 3], [1, 3], [2], [2, 3], [3]];
+    return ['Subsets of [1,2,3]', q.map((x, i) => ({
+      r: [R('current path', x.length ? x : ['{ }'], { [x.length - 1]: 'a' }), R('recorded', q.slice(0, i + 1).map(y => '[' + y + ']'), { [i]: 'g' })],
+      t: i ? `Record [${x}]. Then choose next, explore, un-choose (backtrack)` : 'Start with the empty subset'
+    }))];
+  },
+  tri() {
+    let w = ['cat', 'car'], seen = new Set(), s = [];
+    w.forEach(x => [...x].forEach((c, i) => {
+      let p = x.slice(0, i + 1), n = !seen.has(p);
+      seen.add(p);
+      s.push({ r: [R('inserting ' + x, [...x], { [i]: n ? 'g' : 'b' }), R('trie nodes', [...seen])], t: n ? `No node for "${p}" → create node` : `Prefix "${p}" exists → reuse shared prefix` });
+    }));
+    return ['Trie insert "cat", "car"', s];
+  },
+  gr() {
+    let G = { 0: [1, 2], 1: [3], 2: [3, 4], 3: [], 4: [] }, q = [0], seen = [0], s = [{ r: [R('edges', ['0→1,2', '1→3', '2→3,4']), R('queue', [0]), R('visited', [0])], t: 'BFS from root node 0' }];
+    while (q.length) {
+      let u = q.shift(), nw = [];
+      G[u].forEach(x => {
+        if (!seen.includes(x)) {
+          seen.push(x);
+          q.push(x);
+          nw.push(x);
+        }
+      });
+      s.push({ r: [R('popped', [u], { 0: 'a' }), R('queue', q.length ? [...q] : ['(empty)']), R('visited', [...seen], Object.fromEntries(nw.map(x => [seen.indexOf(x), 'g'])))], t: `Pop ${u}, enqueue unvisited neighbours ${nw.length ? nw.join(',') : '(none)'}; visited set prevents cycles` });
+    }
+    return ['BFS with queue & visited', s];
+  },
+  dp() {
+    let d = [1, 1], s = [{ r: [R('dp table', [1, 1, '?', '?', '?', '?', '?'])], t: 'Climbing Stairs 1D: dp[i] = dp[i-1] + dp[i-2], base dp[0]=1, dp[1]=1' }];
+    for (let i = 2; i <= 6; i++) {
+      d.push(d[i - 1] + d[i - 2]);
+      s.push({ r: [R('dp table', [...d, ...Array(6 - i).fill('?')], { [i]: 'g', [i - 1]: 'b', [i - 2]: 'b' }, { [i]: 'i' })], t: `dp[${i}] = dp[${i - 1}] (${d[i - 1]}) + dp[${i - 2}] (${d[i - 2]}) = ${d[i]}` });
+    }
+    return ['Climbing Stairs 1D DP table fill', s];
+  },
+  dp2() {
+    let grid = [[1, 1, 1], [1, 2, 3], [1, 3, 6]], s = [{ r: [R('row 0', [1, 1, 1]), R('row 1', [1, '?', '?']), R('row 2', [1, '?', '?'])], t: 'Unique Paths 2D: dp[r][c] = dp[r-1][c] + dp[r][c-1]' }];
+    s.push({ r: [R('row 0', [1, 1, 1]), R('row 1', [1, 2, '?'], { 1: 'g' }), R('row 2', [1, '?', '?'])], t: 'dp[1][1] = top(1) + left(1) = 2' });
+    s.push({ r: [R('row 0', [1, 1, 1]), R('row 1', [1, 2, 3], { 2: 'g' }), R('row 2', [1, '?', '?'])], t: 'dp[1][2] = top(1) + left(2) = 3' });
+    s.push({ r: [R('row 0', [1, 1, 1]), R('row 1', [1, 2, 3]), R('row 2', [1, 3, '?'], { 1: 'g' })], t: 'dp[2][1] = top(2) + left(1) = 3' });
+    s.push({ r: [R('row 0', [1, 1, 1]), R('row 1', [1, 2, 3]), R('row 2', [1, 3, 6], { 2: 'g' })], t: 'dp[2][2] = top(3) + left(3) = 6 total paths' });
+    return ['Unique Paths 2D Grid DP fill', s];
+  },
+  gd() {
+    let A = [2, 3, 1, 1, 4], r = 0, s = [];
+    for (let i = 0; i < 5 && i <= r; i++) {
+      r = Math.max(r, i + A[i]);
+      s.push({ r: [R('jumps', A, { [i]: 'a' }, { [i]: 'i' }), R('farthest', [r])], t: `At index ${i}: reach = max(reach, ${i}+${A[i]}) = ${r}` + (r >= 4 ? ' ≥ last index 4 → reachable ✓' : '') });
+      if (r >= 4) break;
+    }
+    return ['Jump Game (Greedy max reach)', s];
+  },
+  iv() {
+    let A = [[1, 3], [2, 6], [8, 10], [15, 18]], m = [], s = [];
+    A.forEach((x, i) => {
+      let l = m[m.length - 1], ov = l && x[0] <= l[1];
+      if (ov) l[1] = Math.max(l[1], x[1]);
+      else m.push([...x]);
+      s.push({ r: [R('sorted', A.map(a => `[${a}]`), { [i]: 'a' }), R('merged', m.map(a => `[${a}]`), { [m.length - 1]: 'g' })], t: ov ? `[${x}] overlaps with last → extend end to ${l[1]}` : `[${x}] starts after last → push new interval` });
+    });
+    return ['Merge Overlapping Intervals', s];
+  },
+  ma() {
+    let b = 2, n = 10, r = 1, s = [{ r: [R('base', [b]), R('n', [n]), R('result', [r])], t: 'Fast Pow(2, 10) in O(log n): square base, halve exponent' }];
+    while (n > 0) {
+      let o = n & 1;
+      if (o) r *= b;
+      b *= b;
+      n >>= 1;
+      s.push({ r: [R('base', [b]), R('n', [n]), R('result', [r], o ? { 0: 'g' } : {})], t: o ? 'n was odd → multiply result by base' : 'n was even → square base only' });
+    }
+    return ['Pow(x, n) Fast Binary Exponentiation', s];
+  },
+  bi() {
+    let n = 13, c = 0, s = [];
+    while (n) {
+      let b = n.toString(2).padStart(4, '0');
+      s.push({ r: [R('n (binary)', [...b], Object.fromEntries([...b].map((x, i) => [i, x == '1' ? 'a' : '']))), R('ones counted', [c])], t: 'n & (n−1) clears the lowest set bit in O(1)' });
+      n &= n - 1;
+      c++;
+    }
+    s.push({ r: [R('ones', [c], { 0: 'g' })], t: 'n is now 0: 13 (1101) has 3 set bits; loop ran exactly 3 times ✓' });
+    return ['Number of 1 Bits (Brian Kernighan)', s];
+  }
+};
+
+/* ============================================================
+   2. STATE & STORAGE MANAGEMENT (100% PRIVATE PER VISITOR)
+   ============================================================ */
+const $ = s => document.querySelector(s);
+let S;
+try {
+  S = JSON.parse(localStorage.getItem('dsa90_master') || '{}');
+} catch (e) { S = {}; }
+S.days = S.days || {};
+S.pomoWork = S.pomoWork || 25;
+S.pomoBreak = S.pomoBreak || 5;
+
+const save = () => {
+  try { localStorage.setItem('dsa90_master', JSON.stringify(S)); } catch (e) {}
+};
+
+const dd = d => S.days[d] = S.days[d] || { lk: {}, sv: {}, nt: {}, vz: {}, ack: 0, gh: '', done: 0 };
+const esc = x => String(x).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const rowH = r => `<div class="rw"><b>${r.n}</b>` + r.v.map((x, i) => `<span class="bx ${r.h[i] || ''}">${x}<i>${r.p[i] || ''}</i></span>`).join('') + '</div>';
+
+const pt = d => D[d][0];
+const T = d => pt(d) == 'Review' ? 'R' : pt(d) == 'Mock' ? 'M' : 'N';
+const keys = d => pt(d).split(' + ');
+
+const STP = {
+  N: ['Study', 'Solve', 'Understand', 'GitHub'],
+  R: ['Recall', 'Redo', 'GitHub'],
+  M: ['Mock', 'GitHub']
+};
+
+function probs(d) {
+  if (T(d) == 'N') return D[d][1].map(x => ({ n: x[0], f: x[1], s: x[2] }));
+  if (T(d) == 'R') {
+    let a = [];
+    for (let i = Math.max(1, d - 6); i < d; i++) {
+      if (T(i) == 'N') a.push(...probs(i));
+    }
+    return a;
+  }
+  return dd(d).mock || [];
+}
+
+const firstInc = () => {
+  for (let d = 1; d <= 90; d++) {
+    if (!dd(d).done) return d;
+  }
+  return 91;
+};
+
+const ghOk = (d, u) => /^https:\/\/github\.com\/[\w.-]+\/[\w.-]+\/(commit|blob|tree|pull)\/\S+/.test(u || '') && !Object.entries(S.days).some(([k, v]) => k != d && v.gh == u);
+
+function why(d, n) {
+  const s = dd(d), P = probs(d);
+  if (n == 'Study') {
+    if (Object.keys(s.lk).filter(k => k[0] == 'r').length < 2) return 'Open at least 2 study/walkthrough resources first.';
+    if (!s.ack) return 'Tick the "I can explain this pattern in my own words" checkbox.';
+  }
+  if (n == 'Recall' && !s.ack) return 'Review your past notes and tick the recall checkbox.';
+  if (n == 'Mock' && P.length < 3) return 'Generate your 3 mock problems first.';
+  if (n == 'Solve' || n == 'Redo' || n == 'Mock') {
+    for (const p of P) {
+      if (!s.sv[p.s]) return `"${p.n}" is not marked accepted yet.`;
+    }
+  }
+  if (n == 'Understand') {
+    for (const k of keys(d)) {
+      if (!(s.vz || {})[k]) return `Step through the whole "${k}" animation to its last step to unlock.`;
+    }
+  }
+  if (n == 'GitHub' && !ghOk(d, s.gh)) return 'Paste a valid, unused GitHub commit, file, tree or PR link (e.g. .../commit/<sha>).';
+  return '';
+}
+
+let cur = Math.min(firstInc(), 90), stp = 0, vi = {}, ap = null;
+
+const toast = m => {
+  const t = $('#toast');
+  t.textContent = m;
+  t.style.display = 'block';
+  clearTimeout(t.h);
+  t.h = setTimeout(() => t.style.display = 'none', 3800);
+};
+
+/* Audio Chime using Web Audio API */
+function playChime(success = true) {
+  try {
+    const ctx = new (window.AudioContext || window.webkitAudioContext)();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    if (success) {
+      osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+      osc.frequency.setValueAtTime(880, ctx.currentTime + 0.12);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.4);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.4);
+    } else {
+      osc.frequency.setValueAtTime(300, ctx.currentTime);
+      gain.gain.setValueAtTime(0.2, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.2);
+      osc.start();
+      osc.stop(ctx.currentTime + 0.2);
+    }
+  } catch(e) {}
+}
+
+/* Confetti Burst */
+function triggerConfetti() {
+  const canvas = document.getElementById('confetti-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  let particles = Array.from({ length: 90 }, () => ({
+    x: canvas.width / 2,
+    y: canvas.height / 2,
+    vx: (Math.random() - 0.5) * 14,
+    vy: (Math.random() - 0.8) * 16,
+    size: Math.random() * 7 + 4,
+    color: ['#38bdf8', '#10b981', '#f59e0b', '#fbbf24', '#c084fc', '#f43f5e'][Math.floor(Math.random() * 6)],
+    alpha: 1,
+    decay: Math.random() * 0.02 + 0.015
+  }));
+
+  function update() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    let active = false;
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      p.vy += 0.4;
+      p.alpha -= p.decay;
+      if (p.alpha > 0) {
+        active = true;
+        ctx.globalAlpha = p.alpha;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.size, p.size);
+      }
+    });
+    if (active) requestAnimationFrame(update);
+    else ctx.clearRect(0, 0, canvas.width, canvas.height);
+  }
+  update();
+}
+
+function firstBad(d) {
+  const st = STP[T(d)];
+  for (let i = 0; i < st.length; i++) {
+    if (why(d, st[i])) return i;
+  }
+  return st.length - 1;
+}
+
+function go(d) {
+  clearInterval(ap);
+  cur = d;
+  stp = firstBad(d);
+  render();
+  window.scrollTo(0, 0);
+}
+
+const L = k => { const s = dd(cur); s.lk[k] = 1; save(); };
+const A = (k, v) => { dd(cur)[k] = v; save(); render(); };
+const N = (sl, v) => { dd(cur).nt[sl] = v; save(); };
+
+function Sv(sl) {
+  const s = dd(cur), el = $('#n_' + sl);
+  if (el) s.nt[sl] = el.value;
+  if (!s.lk['p' + sl]) {
+    playChime(false);
+    return toast('Open the problem on LeetCode first.');
+  }
+  if (T(cur) == 'N' && (s.nt[sl] || '').trim().length < 15) {
+    playChime(false);
+    return toast('Write your approach note (pattern + time/space, ≥15 chars).');
+  }
+  s.sv[sl] = 1;
+  save();
+  playChime(true);
+  render();
+}
+
+function U(sl) {
+  delete dd(cur).sv[sl];
+  dd(cur).done = 0;
+  save();
+  render();
+}
+
+function Nx() {
+  const m = why(cur, STP[T(cur)][stp]);
+  if (m) {
+    playChime(false);
+    toast(m);
+    return;
+  }
+  stp++;
+  playChime(true);
+  render();
+}
+
+function Tb(i) {
+  for (let j = 0; j < i; j++) {
+    const m = why(cur, STP[T(cur)][j]);
+    if (m) {
+      stp = j;
+      playChime(false);
+      toast(`Complete step ${j + 1} (${STP[T(cur)][j]}) first: ${m}`);
+      return render();
+    }
+  }
+  stp = i;
+  render();
+}
+
+function G(v) {
+  dd(cur).gh = v.trim();
+  save();
+  if (v && !ghOk(cur, v.trim())) {
+    playChime(false);
+    toast('Not a valid or unused GitHub URL');
+  }
+  render();
+}
+
+function Fin() {
+  const f = firstInc();
+  if (cur > f) {
+    playChime(false);
+    toast(`Day ${f} is incomplete. Returning to Day ${f}.`);
+    return go(f);
+  }
+  const b = firstBad(cur);
+  if (why(cur, STP[T(cur)][b])) {
+    stp = b;
+    playChime(false);
+    toast(`Step ${b + 1} (${STP[T(cur)][b]}) is incomplete: ${why(cur, STP[T(cur)][b])}`);
+    return render();
+  }
+  dd(cur).done = Date.now();
+  save();
+  playChime(true);
+  triggerConfetti();
+  toast(`🎉 Day ${cur} completed! Incredible discipline.`);
+  render();
+}
+
+function Re() {
+  dd(cur).done = 0;
+  save();
+  stp = 0;
+  render();
+}
+
+function Mk() {
+  const all = [];
+  for (let d = 1; d < 90; d++) {
+    if (T(d) == 'N') probs(d).forEach(p => all.push(p));
+  }
+  const pick = (f, n) => all.filter(p => p.f == f).sort(() => Math.random() - .5).slice(0, n);
+  dd(cur).mock = [...pick('M', 2), ...pick('H', 1)];
+  save();
+  playChime(true);
+  render();
+}
+
+function Vs(k, x) {
+  const sp = V[M[k]]()[1];
+  vi[k] = Math.max(0, Math.min(sp.length - 1, (vi[k] || 0) + x));
+  if (vi[k] == sp.length - 1) {
+    const s = dd(cur);
+    (s.vz = s.vz || {})[k] = 1;
+    save();
+  }
+  render();
+}
+
+function Vp(k) {
+  clearInterval(ap);
+  vi[k] = -1;
+  ap = setInterval(() => {
+    const n = V[M[k]]()[1].length;
+    if ((vi[k] || 0) >= n - 1) return clearInterval(ap);
+    Vs(k, 1);
+  }, 1300);
+}
+
+function vizH(k) {
+  const [ttl, sp] = V[M[k]](), i = Math.min(Math.max(vi[k] || 0, 0), sp.length - 1), x = sp[i];
+  return `
+    <div class="c">
+      <h3>${k} — ${ttl}</h3>
+      ${x.r.map(rowH).join('')}
+      <p class="note">${x.t}</p>
+      <div class="lk" style="margin-top:12px">
+        <button onclick="Vs('${k}',-1)">◀ Back</button>
+        <button class="p" onclick="Vs('${k}',1)">Next Step ▶</button>
+        <button onclick="Vp('${k}')">⏵ Auto-play</button>
+        <span class="mu" style="margin-left:auto">step ${i + 1}/${sp.length} ${(dd(cur).vz || {})[k] ? '· ✔ completed' : '· (reach last step to unlock)'}</span>
+      </div>
+    </div>
+  `;
+}
+
+const chk = (k, l) => `<label class="chk"><input type="checkbox" ${dd(cur)[k] ? 'checked' : ''} onchange="A('${k}',this.checked)"><span>${l}</span></label>`;
+
+function solveH(P, note) {
+  const s = dd(cur);
+  return P.map(p => `
+    <div class="c">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div><span class="badge ${p.f}">${p.f}</span> <b style="font-size:1.02rem">${p.n}</b></div>
+        <div class="lk" style="margin:0">
+          <a target="_blank" rel="noopener" href="https://leetcode.com/problems/${p.s}/" onclick="L('p${p.s}')">Open on LeetCode ↗</a>
+          <a target="_blank" rel="noopener" href="https://leetcode.com/problems/${p.s}/solutions/" onclick="L('r:s${p.s}')">Community Solutions ↗</a>
+        </div>
+      </div>
+      ${note ? `<textarea id="n_${p.s}" rows="2" placeholder="Your approach: pattern + time/space complexity (required ≥15 chars)" onchange="N('${p.s}',this.value)">${esc(s.nt[p.s] || '')}</textarea>` : ''}
+      <div style="margin-top:8px">
+        ${s.sv[p.s]
+          ? `<button class="ok sm" onclick="U('${p.s}')">✔ Accepted · tap to unmark</button>`
+          : `<button class="p sm" onclick="Sv('${p.s}')">Mark accepted ✔</button>`}
+      </div>
+    </div>
+  `).join('');
+}
+
+function body(d, n) {
+  const s = dd(d), P = probs(d);
+  let h = '';
+
+  if (n == 'Study') {
+    h += keys(d).map(k => `
+      <div class="c">
+        <h3>📖 ${k} Concept Card</h3>
+        <p style="margin:6px 0;font-size:13.5px">${C[k] || ''}</p>
+        <div class="lk">
+          ${res(k).map(([t, u], i) => `<a target="_blank" rel="noopener" href="${u}" onclick="L('r:${k}${i}')">${t} ↗</a>`).join('')}
+        </div>
+      </div>
+    `).join('');
+
+    h += `
+      <div class="c">
+        <h3>▶ Video Walkthroughs (Try solving first before watching)</h3>
+        ${P.map(p => `
+          <div class="pr">
+            <span class="badge ${p.f}">${p.f}</span> ${p.n}
+            <a style="margin-left:auto" target="_blank" rel="noopener" href="${yt('neetcode ' + p.n)}" onclick="L('r:v${p.s}')">NeetCode Video ↗</a>
+          </div>
+        `).join('')}
+      </div>
+      <div class="c">
+        ${chk('ack', 'I read the material and can explain this pattern in my own words.')}
+      </div>
+    `;
+  }
+
+  if (n == 'Recall') {
+    let a = [];
+    for (let i = Math.max(1, d - 6); i < d; i++) {
+      Object.entries(dd(i).nt).forEach(([k, v]) => {
+        if (v.trim()) a.push(`<div class="pr"><b>Day ${i} (${k}):</b> ${esc(v)}</div>`);
+      });
+    }
+    h += `
+      <div class="c">
+        <h3>🧠 Your Own Approach Notes from Earlier Days</h3>
+        ${a.join('') || '<p class="mu">No notes recorded for the last 6 days.</p>'}
+        <div class="lk" style="margin-top:10px"><a target="_blank" href="https://neetcode.io/roadmap">NeetCode Roadmap ↗</a></div>
+      </div>
+      <div class="c">
+        ${chk('ack', 'I reviewed my notes. Now I will redo all problems without peeking at old code.')}
+      </div>
+    `;
+  }
+
+  if (n == 'Solve') h += solveH(P, 1);
+  if (n == 'Redo') h += solveH(P, 0);
+
+  if (n == 'Mock') {
+    h += `
+      <div class="c" style="border-color:var(--purple);background:color-mix(in srgb, var(--purple) 8%, var(--card))">
+        <h3 style="color:var(--purple)">⏱️ Final Mock Test: 45 min each, no hints</h3>
+        <p class="mu">2 random Mediums + 1 Hard drawn from your 150 roadmap.</p>
+        <button class="p sm" style="margin-top:8px" onclick="Mk()">${P.length ? 'Re-roll Problems' : 'Generate Mock Problems'}</button>
+      </div>
+    ` + solveH(P, 0);
+  }
+
+  if (n == 'Understand') {
+    h += `<p class="mu" style="margin:6px 0">Step through the animation to the very end to understand pointer/state movement:</p>` + keys(d).map(vizH).join('');
+  }
+
+  if (n == 'GitHub') {
+    const u = s.gh || '';
+    h += `
+      <div class="c">
+        <h3>⬆ Push Today's Solutions to GitHub</h3>
+        <pre>mkdir -p day-${String(d).padStart(2, '0')}-${pt(d).replace(/[\s+]+/g, '-')} && cd day-${String(d).padStart(2, '0')}-${pt(d).replace(/[\s+]+/g, '-')}
+# save your solution code as solution.py / .java / .cpp
+git add . && git commit -m "Day ${d}: ${pt(d)} — ${P.length} problems"
+git push</pre>
+        <p style="margin:12px 0 4px;font-size:13.5px">Paste the link of that commit (e.g. github.com/you/repo/commit/...):</p>
+        <input type="url" value="${esc(u)}" placeholder="https://github.com/your-username/dsa-90/commit/abc123" onchange="G(this.value)">
+        ${u ? (ghOk(d, u) ? '<span style="color:var(--easy);font-weight:600;font-size:12.5px">✔ Valid GitHub link verified!</span>' : '<span style="color:var(--hard);font-weight:600;font-size:12.5px">✖ Invalid or already used commit link</span>') : ''}
+      </div>
+    `;
+  }
+
+  return h;
+}
+
+function stats() {
+  let days = 0, pr = 0, dates = new Set();
+  for (let d = 1; d <= 90; d++) {
+    const s = dd(d);
+    if (s.done) {
+      days++;
+      dates.add(new Date(s.done).toDateString());
+      if (T(d) == 'N') pr += probs(d).length;
+    }
+  }
+  let k = 0, t = new Date();
+  if (!dates.has(t.toDateString())) t.setDate(t.getDate() - 1);
+  while (dates.has(t.toDateString())) {
+    k++;
+    t.setDate(t.getDate() - 1);
+  }
+  return { days, pr, k };
+}
+
+function SD(v) {
+  S.start = v;
+  save();
+  render();
+}
+
+/* Theme Switcher (Cycle through Focus Palettes) */
+const THEMES = ['obsidian', 'forest', 'tokyo', 'light'];
+function cycleTheme() {
+  const curTheme = document.documentElement.getAttribute('data-theme') || 'obsidian';
+  const nextTheme = THEMES[(THEMES.indexOf(curTheme) + 1) % THEMES.length];
+  document.documentElement.setAttribute('data-theme', nextTheme);
+  S.theme = nextTheme;
+  save();
+  toast(`🎨 Switched to ${nextTheme.toUpperCase()} theme`);
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(S, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `dsa_warroom_backup_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+}
+
+function importData(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const data = JSON.parse(ev.target.result);
+      if (data.days) {
+        S = data;
+        save();
+        toast('Backup restored successfully!');
+        location.reload();
+      }
+    } catch(err) { toast('Invalid JSON backup file.'); }
+  };
+  reader.readAsText(file);
+}
+
+function render() {
+  const d = cur, s = dd(d), f = firstInc(), st = STP[T(d)], lock = d > f, x = stats();
+  let beh = '';
+  if (S.start) {
+    const e = Math.min(90, Math.floor((Date.now() - new Date(S.start)) / 864e5) + 1);
+    beh = f > 90
+      ? '<span style="color:var(--easy)">🏆 90-Day Challenge Complete! You are placement-ready.</span>'
+      : e > f
+        ? `<span style="color:var(--hard)">⚠️ Behind by ${e - f} day(s). Double down today!</span>`
+        : e < f
+          ? '<span style="color:var(--easy)">🚀 Ahead of schedule!</span>'
+          : '<span style="color:var(--easy)">⚡ On track! Keep showing up.</span>';
+  }
+
+  let h = `
+    <div class="c">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+        <div>
+          <b style="font-size:1.05rem">${x.days}/90 days done</b> · <span class="mu">${x.pr}/150 problems · 🔥 ${x.k}-day streak</span>
+        </div>
+        <label class="mu" style="display:flex;align-items:center;gap:6px">
+          Start date: <input type="date" value="${S.start || ''}" onchange="SD(this.value)" style="width:auto;padding:4px 8px;font-size:12px;margin:0">
+        </label>
+      </div>
+      <div class="bar-track"><div class="bar-fill" style="width:${(x.days / 90) * 100}%"></div></div>
+      <p style="margin:4px 0 10px;font-size:13px">${beh}</p>
+      <div class="gr">
+        ${Array.from({ length: 90 }, (_, i) => {
+          const n = i + 1;
+          const isDone = !!dd(n).done;
+          const isNow = n == f;
+          const isLock = n > f;
+          const isSel = n == d;
+          const isRev = T(n) == 'R';
+          const isMock = n == 90;
+          let cls = '';
+          if (isDone) cls += ' done';
+          if (isNow) cls += ' now';
+          if (isLock) cls += ' lock';
+          if (isSel) cls += ' sel';
+          if (isRev) cls += ' rev';
+          if (isMock) cls += ' mock';
+          return `<button class="${cls}" onclick="go(${n})" title="Day ${n}: ${pt(n)}">${n}</button>`;
+        }).join('')}
+      </div>
+    </div>
+  `;
+
+  h += `<h2 style="display:flex;align-items:center;gap:8px">Day ${d} · ${pt(d)} ${s.done ? '✅' : ''}</h2>`;
+
+  if (lock) {
+    h += `
+      <div class="c card-warn">
+        <b>🔒 Locked.</b> Day ${f} is incomplete. Finish it first — zero skipping permitted.
+        <div class="lk" style="margin-top:10px"><button class="p" onclick="go(${f})">Go to Day ${f} →</button></div>
+      </div>
+    `;
+  } else if (s.done) {
+    h += `
+      <div class="c" style="border-color:var(--easy)">
+        <b style="color:var(--easy);font-size:1.05rem">Day ${d} Complete! ✔</b>
+        <p class="mu" style="margin:4px 0 12px">All problems solved, visualized, and pushed to GitHub.</p>
+        <div class="lk">
+          <button class="p" onclick="go(${Math.min(d + 1, 90)})">Next Day →</button>
+          <button onclick="Re()">Reopen Day</button>
+        </div>
+      </div>
+    `;
+  } else {
+    h += `
+      <div class="tabs">
+        ${st.map((n, i) => `<button class="${i == stp ? 'on' : ''}" onclick="Tb(${i})">${i + 1}. ${n}${!why(d, n) ? ' ✔' : ''}</button>`).join('')}
+      </div>
+      ${body(d, st[stp])}
+      <div class="lk" style="margin-top:14px">
+        ${stp ? '<button onclick="stp--;render()">◀ Back</button>' : ''}
+        ${stp < st.length - 1 ? '<button class="p" onclick="Nx()">Next Step ▶</button>' : '<button class="ok" onclick="Fin()">Finish Day ✔</button>'}
+      </div>
+    `;
+  }
+
+  $('#app').innerHTML = h;
+}
+
+/* ============================================================
+   3. CUSTOMIZABLE POMODORO TIMER ENGINE
+   ============================================================ */
+let pm = (S.pomoWork || 25) * 60;
+let pi = null;
+let pomoMode = 'work'; // 'work' | 'break'
+
+const pd = () => $('#pt').textContent = String(pm / 60 | 0).padStart(2, '0') + ':' + String(pm % 60).padStart(2, '0');
+
+function togglePomoSettings() {
+  const panel = $('#pomo-settings-panel');
+  panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+  $('#custom-work-min').value = S.pomoWork || 25;
+  $('#custom-break-min').value = S.pomoBreak || 5;
+}
+
+function setPomoPreset(work, brk) {
+  S.pomoWork = work;
+  S.pomoBreak = brk;
+  save();
+  pomoMode = 'work';
+  pm = work * 60;
+  pd();
+  $('#pomo-mode-badge').textContent = 'Work';
+  $('#pomo-mode-badge').style.color = 'var(--accent)';
+  togglePomoSettings();
+  toast(`⏱️ Pomodoro set to ${work}m Work / ${brk}m Break`);
+}
+
+function applyCustomPomo() {
+  const work = parseInt($('#custom-work-min').value) || 25;
+  const brk = parseInt($('#custom-break-min').value) || 5;
+  S.pomoWork = Math.max(1, work);
+  S.pomoBreak = Math.max(1, brk);
+  save();
+  pomoMode = 'work';
+  pm = S.pomoWork * 60;
+  pd();
+  $('#pomo-mode-badge').textContent = 'Work';
+  $('#pomo-mode-badge').style.color = 'var(--accent)';
+  togglePomoSettings();
+  toast(`⏱️ Custom timer applied: ${S.pomoWork}m Work / ${S.pomoBreak}m Break`);
+}
+
+function PM() {
+  if (pi) {
+    clearInterval(pi);
+    pi = null;
+    $('#pm-btn').textContent = 'Start';
+  } else {
+    pi = setInterval(() => {
+      pm--;
+      pd();
+      if (pm <= 0) {
+        clearInterval(pi);
+        pi = null;
+        $('#pm-btn').textContent = 'Start';
+        playChime(true);
+        if (pomoMode === 'work') {
+          toast(`🍅 Work block complete! Take a ${S.pomoBreak || 5}-min break.`);
+          pomoMode = 'break';
+          pm = (S.pomoBreak || 5) * 60;
+          $('#pomo-mode-badge').textContent = 'Break';
+          $('#pomo-mode-badge').style.color = 'var(--easy)';
+        } else {
+          toast('☕ Break finished! Time to lock in and solve.');
+          pomoMode = 'work';
+          pm = (S.pomoWork || 25) * 60;
+          $('#pomo-mode-badge').textContent = 'Work';
+          $('#pomo-mode-badge').style.color = 'var(--accent)';
+        }
+        pd();
+      }
+    }, 1000);
+    $('#pm-btn').textContent = 'Pause';
+  }
+}
+
+function PR() {
+  clearInterval(pi);
+  pi = null;
+  pomoMode = 'work';
+  pm = (S.pomoWork || 25) * 60;
+  pd();
+  $('#pm-btn').textContent = 'Start';
+  $('#pomo-mode-badge').textContent = 'Work';
+  $('#pomo-mode-badge').style.color = 'var(--accent)';
+}
+
+/* ============================================================
+   4. BOOTSTRAP
+   ============================================================ */
+if (S.theme) document.documentElement.setAttribute('data-theme', S.theme);
+stp = firstBad(cur);
+render();
+pd();
+</script>
+</body>
+</html>
